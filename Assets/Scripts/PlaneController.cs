@@ -68,8 +68,10 @@ public class PlaneController : MonoBehaviour {
 
     private void StopPlaneDetection() {
         foreach (var plane in _planeManager.trackables) {
-            if (plane != SelectedPlane)
+            if (plane != SelectedPlane) {
+                plane.GetComponent<MeshCollider>().enabled = false;
                 plane.gameObject.SetActive(false);
+            }
         }
 
         _planeManager.enabled = false;
