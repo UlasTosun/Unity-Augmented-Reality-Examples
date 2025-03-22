@@ -1,4 +1,6 @@
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
@@ -28,6 +30,7 @@ public class PlaneController : MonoBehaviour {
             if (_selectedPlane != value) {
                 _selectedPlane = value;
                 MarkPlane(_selectedPlane);
+                AddNavMesh(_selectedPlane);
                 StopPlaneDetection();
                 OnPlaneSelected?.Invoke(_selectedPlane);
             }
@@ -75,6 +78,14 @@ public class PlaneController : MonoBehaviour {
         }
 
         _planeManager.enabled = false;
+    }
+
+
+
+    private void AddNavMesh(ARPlane plane) {
+        NavMeshSurface surface = plane.gameObject.AddComponent<NavMeshSurface>();
+        surface.useGeometry = NavMeshCollectGeometry.PhysicsColliders;
+        surface.BuildNavMesh();
     }
 
 
