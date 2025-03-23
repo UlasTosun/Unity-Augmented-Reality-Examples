@@ -9,8 +9,10 @@ using UnityEngine.XR.Interaction.Toolkit.Interactors;
 public class Spawner : MonoBehaviour {
 
     [Header("References")]
-    [Tooltip("Prefab to spawn.")]
-    [SerializeField] private GameObject _prefabToSpawn;
+    [Tooltip("Obstacle to spawn.")]
+    [SerializeField] private GameObject _obstacleToSpawn;
+    [Tooltip("Agent to spawn.")]
+    [SerializeField] private GameObject _agentToSpawn;
     [Tooltip("Plane controller to get the selected plane from.")]
     [SerializeField] private PlaneController _planeController;
     [Tooltip("The AR ray interactor to get the raycast hit from.")]
@@ -19,19 +21,30 @@ public class Spawner : MonoBehaviour {
     private bool _isPlaneSelected;
     private bool _readyToSpawn;
     bool _everHadSelection;
+    private GameObject _prefabToSpawn;
+    private SpawnType _spawnType;
 
     public event UnityAction<GameObject> OnObjectSpawned;
+
+    public SpawnType SpawnType { 
+        get => _spawnType;
+        set {
+            _spawnType = value;
+            _prefabToSpawn = _spawnType == SpawnType.Obstacle ? _obstacleToSpawn : _spawnType == SpawnType.Agent ? _agentToSpawn : null;
+        }
+    }
 
 
 
     void Awake() {
+        SpawnType = SpawnType.Obstacle;
         _planeController.OnPlaneSelected += OnPlaneSelected;
     }
 
 
 
     void Update() {
-        if (!_isPlaneSelected)
+        if (!_isPlaneSelected || _prefabToSpawn == null)
             return;
 
         CheckForSpawn();
@@ -66,6 +79,12 @@ public class Spawner : MonoBehaviour {
 
     private void Spawn(Vector3 position) {
         var spawnedObject = Instantiate(_prefabToSpawn, position, Quaternion.identity, transform);
+
+        if (SpawnType == SpawnType.Agent) {
+            Agent agent = spawnedObject.GetComponent<Agent>();
+            agent.Initialize(_rayInteractor, _planeController, this);
+        }
+
         OnObjectSpawned?.Invoke(spawnedObject);
     }
 
@@ -83,4 +102,12 @@ public class Spawner : MonoBehaviour {
 
 
 
+}
+
+
+
+public enum SpawnType {
+    Obstacle,
+    Agent,
+    None
 }

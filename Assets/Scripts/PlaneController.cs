@@ -1,6 +1,6 @@
-using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
+using Unity.AI.Navigation;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
@@ -15,6 +15,8 @@ public class PlaneController : MonoBehaviour {
     [SerializeField] private ARPlaneManager _planeManager;
     [Tooltip("The AR ray interactor to get the raycast hit from.")]
     [SerializeField] private XRRayInteractor _rayInteractor;
+    [Tooltip("The material to apply to the selected plane.")]
+    [SerializeField] private Material _materialForTheSelectedPlane;
 
 
 
@@ -61,6 +63,8 @@ public class PlaneController : MonoBehaviour {
 
     private void MarkPlane(ARPlane plane) {
         plane.GetComponent<ARPlaneMeshVisualizer>().enabled = false;
+        plane.GetComponent<MeshRenderer>().enabled = true;
+        plane.GetComponent<MeshRenderer>().material = _materialForTheSelectedPlane;
         
         plane.GetComponent<LineRenderer>().enabled = true;
         plane.GetComponent<LineRenderer>().startColor = Color.green;

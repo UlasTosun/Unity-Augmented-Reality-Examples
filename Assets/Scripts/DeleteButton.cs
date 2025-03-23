@@ -13,6 +13,8 @@ public class DeleteButton : MonoBehaviour {
     [SerializeField] private XRRayInteractor _rayInteractor;
     [Tooltip("Plane controller to listen for plane selection.")]
     [SerializeField] private PlaneController _planeController;
+    [Tooltip("Spawner to remove objects from.")]
+    [SerializeField] private Spawner _spawner;
 
     private Button _button;
     private GameObject _selectedObject;
