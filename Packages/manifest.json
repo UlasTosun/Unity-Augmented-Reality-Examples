@@ -1,13 +1,13 @@
 {
   "dependencies": {
-    "com.unity.ai.navigation": "2.0.6",
-    "com.unity.collab-proxy": "2.7.1",
+    "com.unity.ai.navigation": "2.0.9",
+    "com.unity.collab-proxy": "2.9.3",
     "com.unity.feature.development": "1.0.2",
-    "com.unity.inputsystem": "1.14.0",
+    "com.unity.inputsystem": "1.14.2",
     "com.unity.learn.iet-framework": "4.0.4",
     "com.unity.multiplayer.center": "1.0.0",
     "com.unity.render-pipelines.universal": "17.0.3",
-    "com.unity.timeline": "1.8.8",
+    "com.unity.timeline": "1.8.9",
     "com.unity.ugui": "2.0.0",
     "com.unity.xr-content.xr-sim-environments": "file:../ContentPackages\\com.unity.xr-content.xr-sim-environments-2.0.1.tgz",
     "com.unity.xr.arcore": "6.1.0",
