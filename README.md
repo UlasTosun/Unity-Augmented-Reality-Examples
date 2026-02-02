@@ -11,4 +11,4 @@ The screenshot below shows NavMesh surface created in a simulated augmented real
 
 This repository is ready to be built for Android and tested in real life via the application. Obstacles and agents can be placed and controlled in the real environments within the application. The YouTube video below is taken from the Android app and shows how the pathfinding system works in a real environment.
 
-[![Android App](https://img.youtube.com/vi/slOXL4ZuG-Y/0.jpg)](https://www.youtube.com/watch?v=slOXL4ZuG-Y)
+[![Android App](Screenshots/Thumbnail.png)](https://www.youtube.com/watch?v=slOXL4ZuG-Y)
